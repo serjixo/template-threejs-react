@@ -1,15 +1,21 @@
 import React, {useRef} from "react";
-import {useFrame} from "@react-three/fiber";
+import {extend, useFrame, useThree} from "@react-three/fiber";
 import Floor from "./world/Floor.jsx";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+extend({OrbitControls})
 
 export default function Experience() {
+    let three = useThree();
     const boxRef = useRef();
 
-    useFrame(() =>
-        boxRef.current.rotation.y += 0.01
+    useFrame((state, delta) =>
+        boxRef.current.rotation.y += delta
     )
+
     return (
         <>
+            <orbitControls args={[three.camera, three.gl.domElement]}/>
             <mesh position-x={-2}>
                 <sphereGeometry/>
                 <meshNormalMaterial/>
@@ -19,6 +25,7 @@ export default function Experience() {
                 <meshNormalMaterial/>
             </mesh>
             <Floor/>
+
         </>
     )
 }
