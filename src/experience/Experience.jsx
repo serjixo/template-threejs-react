@@ -1,5 +1,6 @@
 import React, {useRef} from "react";
 import {useFrame} from "@react-three/fiber";
+import Floor from "./world/Floor.jsx";
 
 export default function Experience() {
     const boxRef = useRef();
@@ -17,10 +18,7 @@ export default function Experience() {
                 <boxGeometry/>
                 <meshNormalMaterial/>
             </mesh>
-            <mesh position={-1} scale={10} rotation-x={-Math.PI * 0.5}>
-                <planeGeometry/>
-                <meshNormalMaterial/>
-            </mesh>
+            <Floor/>
         </>
     )
 }
