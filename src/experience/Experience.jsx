@@ -1,13 +1,11 @@
 import React, {useRef} from "react";
-import {extend, useFrame, useThree} from "@react-three/fiber";
+import {useFrame} from "@react-three/fiber";
 import Floor from "./world/Floor.jsx";
-import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CustomObjectTemplate from "../CustomObjectTemplate.jsx";
+import {OrbitControls} from "@react-three/drei";
 
-extend({OrbitControls})
 
 export default function Experience() {
-    let three = useThree();
     const boxRef = useRef();
 
     useFrame((state, delta) =>
@@ -16,7 +14,7 @@ export default function Experience() {
 
     return (
         <>
-            <orbitControls args={[three.camera, three.gl.domElement]}/>
+            <OrbitControls/>
             <directionalLight position={[1, 2, 3]} intensity={1.5}/>
             <ambientLight position={[2, 2, 3]} intensity={0.5}/>
             <CustomObjectTemplate/>
