@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useRef} from "react";
 
 export default function CustomObjectTemplate() {
+
     const bufferGeometryRef = useRef();
 
     const verticesCount = 10 * 3;
@@ -21,7 +22,7 @@ export default function CustomObjectTemplate() {
 
     return (
         <mesh>
-            <bufferGeometry ref={bufferGeometryRef} side={'doubleSided'}>
+            <bufferGeometry ref={bufferGeometryRef}>
                 <bufferAttribute
                     attach={'attributes-position'}
                     count={verticesCount}
