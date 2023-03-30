@@ -16,16 +16,17 @@ export default function Experience() {
     return (
         <>
             <orbitControls args={[three.camera, three.gl.domElement]}/>
+            <directionalLight position={[1, 2, 3]} intensity={1.5}/>
+            <ambientLight position={[2, 2, 3]} intensity={0.5}/>
             <mesh position-x={-2}>
                 <sphereGeometry/>
-                <meshNormalMaterial/>
+                <meshStandardMaterial color={'#bada55'}/>
             </mesh>
             <mesh ref={boxRef} position-x={2}>
                 <boxGeometry/>
-                <meshNormalMaterial/>
+                <meshStandardMaterial color={'#bafd66'}/>
             </mesh>
             <Floor/>
-
         </>
     )
 }
