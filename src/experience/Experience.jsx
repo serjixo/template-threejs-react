@@ -2,6 +2,7 @@ import React, {useRef} from "react";
 import {extend, useFrame, useThree} from "@react-three/fiber";
 import Floor from "./world/Floor.jsx";
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import CustomObjectTemplate from "../CustomObjectTemplate.jsx";
 
 extend({OrbitControls})
 
@@ -18,6 +19,7 @@ export default function Experience() {
             <orbitControls args={[three.camera, three.gl.domElement]}/>
             <directionalLight position={[1, 2, 3]} intensity={1.5}/>
             <ambientLight position={[2, 2, 3]} intensity={0.5}/>
+            <CustomObjectTemplate/>
             <mesh position-x={-2}>
                 <sphereGeometry/>
                 <meshStandardMaterial color={'#bada55'}/>
