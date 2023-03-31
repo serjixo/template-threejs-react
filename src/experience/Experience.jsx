@@ -2,11 +2,23 @@ import React, {useRef} from "react";
 import {useFrame} from "@react-three/fiber";
 import Floor from "./world/Floor.jsx";
 import CustomObjectTemplate from "../CustomObjectTemplate.jsx";
-import {OrbitControls} from "@react-three/drei";
+import {OrbitControls, PivotControls} from "@react-three/drei";
+import {useControls} from "leva";
 
 
 export default function Experience() {
     const boxRef = useRef();
+    const sphereRef = useRef();
+
+    const {position, color} = useControls({
+        position: {
+            value: {x: -2, y: 0},
+            step: 0.1,
+            joystick: 'invertY'
+        },
+        color: '#ff829e'
+    })
+    console.log(position)
 
     useFrame((state, delta) =>
         boxRef.current.rotation.y += delta
@@ -14,15 +26,20 @@ export default function Experience() {
 
     return (
         <>
-            <OrbitControls/>
+            <OrbitControls makeDefault/>
             <directionalLight position={[1, 2, 3]} intensity={1.5}/>
             <ambientLight position={[2, 2, 3]} intensity={0.5}/>
             <CustomObjectTemplate/>
-            <mesh position-x={-2}>
-                <sphereGeometry/>
-                <meshStandardMaterial color={'#bada55'}/>
-            </mesh>
-            <mesh ref={boxRef} position-x={2}>
+
+            <PivotControls anchor={[0, 0, 0]}>
+                <mesh ref={sphereRef} position={[position.x, position.y, 0]}>
+                    <sphereGeometry/>
+                    <meshStandardMaterial color={color}/>
+                </mesh>
+            </PivotControls>
+            {/*<TransformControls object={sphereRef} mode={'translate'}/>*/}
+
+            <mesh ref={boxRef} position-x={2} >
                 <boxGeometry/>
                 <meshStandardMaterial color={'#bafd66'}/>
             </mesh>
